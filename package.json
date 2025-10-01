@@ -1,0 +1,26 @@
+{
+  "name": "vanquish-promo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nawadotdev/vanquish-promo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nawadotdev/vanquish-promo/issues"
+  },
+  "homepage": "https://github.com/nawadotdev/vanquish-promo#readme",
+  "dependencies": {
+    "discord.js": "^14.22.1",
+    "dotenv": "^17.2.3",
+    "mongoose": "^8.18.3"
+  }
+}
