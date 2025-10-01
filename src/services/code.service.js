@@ -1,4 +1,4 @@
-import { Code } from "../models/code.model";
+import { Code } from "../models/code.model.js";
 
 export const createCode = async (code, startDate = null, endDate = null, maxUses = 1, creator) => {
     if (!code) throw new Error("Code is required");
