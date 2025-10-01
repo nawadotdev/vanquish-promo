@@ -1,5 +1,6 @@
 import "dotenv/config"
 import { Client } from "discord.js";
+import { readdirSync } from "fs";
 
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
@@ -13,4 +14,11 @@ export const startClient = async () => {
     }
 
     await client.login(BOT_TOKEN);
+}
+
+const events = readdirSync("./src/events").filter(file => file.endsWith(".js"));
+
+for (const event of events) {
+    const eventFile = await import(`../events/${event}`);
+    eventFile.default(client);
 }
