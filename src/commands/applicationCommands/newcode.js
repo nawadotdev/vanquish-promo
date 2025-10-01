@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
-import { createCode } from "../../services/code.service.js";
+import { createCode, deleteCode } from "../../services/code.service.js";
 
 export default {
     command: new SlashCommandBuilder()
@@ -58,7 +58,7 @@ export default {
                         { name: "Creator", value: `<@${newCode.creator}>`, inline: true }
                     )
                 ],
-                rows: [
+                components: [
                     new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -69,6 +69,7 @@ export default {
                 ]
             })
         } catch(err){
+            await deleteCode(newCode.code);
             return interaction.editReply({ content: `Error sending code to channel: ${err.message}`, ephemeral: true });
         }
 

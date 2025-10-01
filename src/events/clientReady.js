@@ -6,7 +6,7 @@ export default client => {
     client.once(Events.ClientReady, async (cl) => {
         console.log(`Logged in as ${client.user.tag}`);
 
-        await registerGuildCommands(client);
+        // await registerGuildCommands(client);
     })
 
 }
