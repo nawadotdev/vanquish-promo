@@ -1,11 +1,11 @@
 import "dotenv/config"
-import { Client } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 import { readdirSync } from "fs";
 
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
 const client = new Client({
-    intents: []
+    intents: [GatewayIntentBits.GuildMembers, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessageReactions]
 })
 
 export const startClient = async () => {
