@@ -28,6 +28,17 @@ export const useCode = async (code, userId) => {
 
     const now = Date.now();
 
+    const _code = await getCode(code);
+
+    if (!_code) throw new Error("Code not found");
+
+    if (_code.uses.includes(userId)) throw new Error("You have already used this code");
+
+    if(_code.startDate && now < _code.startDate) throw new Error("This code is not active yet");
+    if(_code.endDate && now > _code.endDate) throw new Error("This code has expired");
+
+    if (_code.uses.length >= _code.maxUses) throw new Error("This code has reached its maximum number of uses");
+
     const result = await Code.findOneAndUpdate(
         {
             code,
