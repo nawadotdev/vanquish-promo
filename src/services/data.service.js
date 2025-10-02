@@ -16,3 +16,7 @@ export const isDataExists = async (discordId) => {
     if (!discordId) throw new Error("Discord ID is required");
     return await Data.exists({ discordId });
 }
+
+export const getAllData = async () => {
+    return await Data.find({});
+}
