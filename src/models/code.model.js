@@ -9,4 +9,6 @@ const codeSchema = new Schema({
     creator: { type: String, required: true }
 }, { timestamps: true })
 
+codeSchema.index({ code: 1 });
+
 export const Code = model("Code", codeSchema);

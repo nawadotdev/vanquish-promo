@@ -6,6 +6,4 @@ const dataSchema = new Schema({
     phone: { type: String, required: false }
 }, { timestamps: true });
 
-dataSchema.index({ discordId: 1 });
-
 export const Data = model("Data", dataSchema);
