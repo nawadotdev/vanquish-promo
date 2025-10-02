@@ -35,6 +35,23 @@ for (const file of buttonFiles) {
     }
 }
 
+const modals = new Map()
+const modalFiles = readdirSync("./src/commands/modals").filter(file => file.endsWith(".js"));
+console.log(`Found ${modalFiles.length} modal command files. (Interaction create)`);
+for (const file of modalFiles) {
+    try {
+        const modalCommand = await import(`../commands/modals/${file}`);
+        if (modalCommand && modalCommand.default && modalCommand.default.customId && modalCommand.default.execute) {
+            modals.set(modalCommand.default.customId, modalCommand.default);
+            console.log(`Loaded modal command: ${modalCommand.default.customId}`);
+        } else {
+            console.warn(`Invalid modal command file: ${file}`);
+        }
+    } catch (err) {
+        console.error(`Error loading modal command file ${file}:`, err);
+    }
+}
+
 export default async client => {
 
     client.on(Events.InteractionCreate, async interaction => {
@@ -47,6 +64,10 @@ export default async client => {
 
         if (interaction.isButton?.()) {
             command = buttons.get(interaction.customId);
+        }
+
+        if(interaction.isModalSubmit?.()) {
+            command = modals.get(interaction.customId);
         }
 
         if (!command) {
